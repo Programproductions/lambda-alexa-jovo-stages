@@ -34,7 +34,7 @@ Update & save the following variables:
 - alexa_skill_id   = "YOUR_PROVISIONED_ALEXA SKILL_ID"
 - function_version = "$LATEST"
 
-VERY IMORTANT - uncomment out the *tfvars and *tfvras.json in the gitignore file
+**VERY IMPORTANT - uncomment out the *tfvars and *tfvras.json in the gitignore file**  if you don't do this you may expose you credentials when using git
 
 
 # To START:
@@ -65,22 +65,25 @@ terraform workspace select dev
 
 terraform plan -out plan.out -var-file.dev.tfvars
 
-this instructs terraform to use the credentials and en vars in you dev.tfvars file - nothing is provisioned yet - so check that the behaviour in the plan is expected
+this instructs terraform to use the credentials and environemnt variables in your dev.tfvars file - nothing is provisioned yet - so check that the behaviour in the plan is expected
 
 8. If all good use the command
 
 terraform apply plan.out
 
 CONGRATULATIONS YOUR DEV STAGE IS NOW PROVISIONED! 
+
 GO HAVE A PEEK IN YOUR AWS CONSOLE :)
 
 # NOW CREATE NEW STAGE
 
-To create a new stage simpley follow the steps above this time when you run the terraform workspace new add a new stage - eg staging or prod. You can add you bundle.zip in the associated folders. Remember to configure the Alexa skill id relevant for your stage.
+To create a new stage simply consgigure the tfvar file for the stage(staging/prod) follow the steps above. This time when you run the terraform workspace new add a new stage - eg staging or prod.
 
-When using the plan out command simoply use the .tf var files for teh worksapce you are in eg terraform plan -out plan.out -var-file=prod.tfvars
+You can add you bundle.zip in the associated folders. Remember to configure the Alexa skill id relevant for your stage.
 
-As mentioned bfore the lambdas are in three region default being us-east-1. You na cahnge the regions by configuring the providers in the providers.tf file
+When using the plan out command simply use the .tf var files for the workspace you are in eg terraform plan -out plan.out -var-file=prod.tfvars
+
+As mentioned bfore the lambdas are in three region default being us-east-1. You can change the regions by configuring the providers in the providers.tf file
 
 NOTE you can switch between workspaces/stages any time with the workspace select command eg:
 
