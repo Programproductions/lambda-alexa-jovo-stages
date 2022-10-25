@@ -1,18 +1,17 @@
 
 # TERRAFORM LAMBDAS FOR ALEXA
 
-This Terraform template will create 3 fully configurable Lambdas in 3 stages - dev/staging and prod. (total 9 lambdas) for your Jovo alexa project. 
+This Terraform template will create 3 fully configurable Lambdas in 3 stages - dev/staging/prod. (total 9 lambdas) for your Jovo Alexa project. 
 
 Each Lamba is preconfigured with an Alexa trigger - just add you skill id in the .tfvars file
 
-Each Lambda has an Alias precofigured with an Alexa trigger that is teh same as above. so the Alias can also used as the Alexa endpoint. 
+Each Lambda has an Alias precofigured with an Alexa trigger that is the same as above. So the Alias can also used as the Alexa endpoint. 
 
-Each lamda has some pre-populated Environment variables that you can change to whatever you want. Just be sure to add sensitive info to the tfvars then add a referecne in the variables.tf file. Less sensitive variables can just be declared in the variables.tf file 
+Each Lamda has some pre-populated Environment variables that you can change to whatever you want. Just be sure to add sensitive info to the tfvars then add a reference in the variables.tf file. Less sensitive variables can just be declared in the variables.tf file followingthe format shown.
 
-Each Lambda is also preconfigured with DynamoDb, S3 and Cloudwatch logging permissions. 
+Each Lambda is also preconfigured with DynamoDb, S3 and Cloudwatch logging permissions. The permission scope is for "all" permissions on the resources. recommended best practice is to reduce this to only permissions needed. 
 
-If you dont want all three Lambas just remove the ones you dont want. The Lambdas are configured for US/UK and AU region but can easily be changed. 
-
+If you dont want all three Lambdas, just remove the ones you dont want from the code. The Lambdas are configured for US/UK/AU regions but can easily be changed. 
 
 After provisioning the Lambdas, you will get an output in the console of the relevant lambda and Alias arns to use for the Alexa endpoints. You can take thse arns and use them in you Jovo project file stages   
 
@@ -63,7 +62,7 @@ You can always ensure you are in the correct "workspace" with the following comm
 
 7. Make a terraform plan with the following command:
 
-**terraform plan -out plan.out -var-file.dev.tfvars**
+**terraform plan -out plan.out -var-file=dev.tfvars**
 
 this instructs terraform to use the credentials and environemnt variables in your dev.tfvars file - nothing is provisioned yet - so check that the behaviour in the plan is expected
 
