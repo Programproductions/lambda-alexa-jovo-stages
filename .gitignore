@@ -1,0 +1,18 @@
+
+
+**/node_modules
+
+
+#*.tfvars
+#*.tfvars.json
+
+# Local .terraform directories
+**/.terraform/*
+*.tfstate/*
+*.terraform.lock.hcl
+plan.out
+# .tfstate files
+*.tfstate
+.tfstate.*
+
+bundle.zip
