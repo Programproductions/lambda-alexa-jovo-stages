@@ -11,20 +11,15 @@ resource "aws_lambda_function" "alexa_business_logic" {
   runtime       = "nodejs16.x"
   timeout       = "7"
   memory_size   = "1024"
-  #s3_bucket     = "image-generator-${var.environment}"
-  # s3_key        = "bundle.zip"
+
 
   filename         = "./function/${var.environment}/bundle.zip"
   source_code_hash = filebase64sha256("./function/${var.environment}/bundle.zip")
   environment {
     variables = {
-      ACCESS_KEY_ID     = var.access_key
-      SECRET_ACCESS_KEY = var.secret_key
-      REGION            = var.region
-      ENVIRONMENT       = var.environment
-      OPEN_API_KEY      = var.open_api_key
-
-
+      #add your environment variables here
+      REGION      = var.region
+      ENVIRONMENT = var.environment
     }
   }
   depends_on = [
@@ -86,13 +81,8 @@ resource "aws_lambda_function" "alexa_business_logic_uk" {
   source_code_hash = filebase64sha256("./function/${var.environment}/bundle.zip")
   environment {
     variables = {
-      ACCESS_KEY_ID     = var.access_key
-      SECRET_ACCESS_KEY = var.secret_key
-      REGION            = var.region
-      ENVIRONMENT       = var.environment
-      OPEN_API_KEY      = var.open_api_key
-
-
+      REGION      = var.region
+      ENVIRONMENT = var.environment
     }
   }
   depends_on = [
@@ -154,13 +144,8 @@ resource "aws_lambda_function" "alexa_business_logic_ap" {
   source_code_hash = filebase64sha256("./function/${var.environment}/bundle.zip")
   environment {
     variables = {
-      ACCESS_KEY_ID     = var.access_key
-      SECRET_ACCESS_KEY = var.secret_key
-      REGION            = var.region
-      ENVIRONMENT       = var.environment
-      OPEN_API_KEY      = var.open_api_key
-
-
+      REGION      = var.region
+      ENVIRONMENT = var.environment
     }
   }
   depends_on = [
