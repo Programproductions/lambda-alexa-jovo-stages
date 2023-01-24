@@ -22,8 +22,9 @@ resource "aws_lambda_function" "alexa_business_logic" {
       SECRET_ACCESS_KEY = var.secret_key
       REGION            = var.region
       ENVIRONMENT       = var.environment
-      OPEN_API_KEY      = var.open_api_key
-
+      API_KEY           = var.api_key
+      OPENSEA_API_KEY   = var.opensea_api_key
+      gameAPI_KEY       = var.gameon_api_key
 
     }
   }
@@ -79,7 +80,7 @@ resource "aws_lambda_function" "alexa_business_logic_uk" {
   runtime       = "nodejs16.x"
   timeout       = "7"
   memory_size   = "1024"
-  #s3_bucket     = "image-generator-${var.environment}"
+  # s3_bucket     = "image-generator-${var.environment}"
   # s3_key        = "bundle.zip"
 
   filename         = "./function/${var.environment}/bundle.zip"
@@ -90,9 +91,9 @@ resource "aws_lambda_function" "alexa_business_logic_uk" {
       SECRET_ACCESS_KEY = var.secret_key
       REGION            = var.region
       ENVIRONMENT       = var.environment
-      OPEN_API_KEY      = var.open_api_key
-
-
+      API_KEY           = var.api_key
+      OPENSEA_API_KEY   = var.opensea_api_key
+      gameAPI_KEY       = var.gameon_api_key
     }
   }
   depends_on = [
@@ -158,7 +159,10 @@ resource "aws_lambda_function" "alexa_business_logic_ap" {
       SECRET_ACCESS_KEY = var.secret_key
       REGION            = var.region
       ENVIRONMENT       = var.environment
-      OPEN_API_KEY      = var.open_api_key
+      API_KEY           = var.api_key
+      OPENSEA_API_KEY   = var.opensea_api_key
+      gameAPI_KEY       = var.gameon_api_key
+
 
 
     }
