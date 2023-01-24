@@ -5,14 +5,12 @@
 #####################################################
 # Creating Lambda resource
 resource "aws_lambda_function" "alexa_business_logic" {
-  function_name = "alexa-${var.function_name}-business-logic-${var.environment}"
-  role          = aws_iam_role.lambda_iam.arn
-  handler       = "index.handler"
-  runtime       = "nodejs16.x"
-  timeout       = "7"
-  memory_size   = "1024"
-
-
+  function_name    = "alexa-${var.function_name}-business-logic-${var.environment}"
+  role             = aws_iam_role.lambda_iam.arn
+  handler          = "index.handler"
+  runtime          = "nodejs16.x"
+  timeout          = "7"
+  memory_size      = "1024"
   filename         = "./function/${var.environment}/bundle.zip"
   source_code_hash = filebase64sha256("./function/${var.environment}/bundle.zip")
   environment {
@@ -67,16 +65,13 @@ resource "aws_lambda_permission" "alexa_alias" {
 ########### UK LAMBDA ALEXA BUSINESS LOGIC
 #####################################################
 resource "aws_lambda_function" "alexa_business_logic_uk" {
-  provider      = aws.uk_provider
-  function_name = "alexa-${var.function_name}-business-logic-${var.environment}"
-  role          = aws_iam_role.lambda_iam.arn
-  handler       = "index.handler"
-  runtime       = "nodejs16.x"
-  timeout       = "7"
-  memory_size   = "1024"
-  #s3_bucket     = "image-generator-${var.environment}"
-  # s3_key        = "bundle.zip"
-
+  provider         = aws.uk_provider
+  function_name    = "alexa-${var.function_name}-business-logic-${var.environment}"
+  role             = aws_iam_role.lambda_iam.arn
+  handler          = "index.handler"
+  runtime          = "nodejs16.x"
+  timeout          = "7"
+  memory_size      = "1024"
   filename         = "./function/${var.environment}/bundle.zip"
   source_code_hash = filebase64sha256("./function/${var.environment}/bundle.zip")
   environment {
@@ -130,16 +125,13 @@ resource "aws_lambda_permission" "alexa_alias_uk" {
 ########### AU/AP LAMBDA ALEXA BUSINESS LOGIC
 #####################################################
 resource "aws_lambda_function" "alexa_business_logic_ap" {
-  provider      = aws.ap_provider
-  function_name = "alexa-${var.function_name}-business-logic-${var.environment}"
-  role          = aws_iam_role.lambda_iam.arn
-  handler       = "index.handler"
-  runtime       = "nodejs16.x"
-  timeout       = "7"
-  memory_size   = "1024"
-  #s3_bucket     = "image-generator-${var.environment}"
-  # s3_key        = "bundle.zip"
-
+  provider         = aws.ap_provider
+  function_name    = "alexa-${var.function_name}-business-logic-${var.environment}"
+  role             = aws_iam_role.lambda_iam.arn
+  handler          = "index.handler"
+  runtime          = "nodejs16.x"
+  timeout          = "7"
+  memory_size      = "1024"
   filename         = "./function/${var.environment}/bundle.zip"
   source_code_hash = filebase64sha256("./function/${var.environment}/bundle.zip")
   environment {
