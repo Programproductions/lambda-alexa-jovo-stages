@@ -9,8 +9,8 @@ resource "aws_lambda_function" "alexa_business_logic" {
   role             = aws_iam_role.lambda_iam.arn
   handler          = "index.handler"
   runtime          = "nodejs16.x"
-  timeout          = "7"
-  memory_size      = "1024"
+  timeout          = var.timeout
+  memory_size      = var.memory_size
   filename         = "./function/${var.environment}/bundle.zip"
   source_code_hash = filebase64sha256("./function/${var.environment}/bundle.zip")
   environment {
@@ -70,8 +70,8 @@ resource "aws_lambda_function" "alexa_business_logic_uk" {
   role             = aws_iam_role.lambda_iam.arn
   handler          = "index.handler"
   runtime          = "nodejs16.x"
-  timeout          = "7"
-  memory_size      = "1024"
+  timeout          = var.timeout
+  memory_size      = var.memory_size
   filename         = "./function/${var.environment}/bundle.zip"
   source_code_hash = filebase64sha256("./function/${var.environment}/bundle.zip")
   environment {
@@ -130,8 +130,8 @@ resource "aws_lambda_function" "alexa_business_logic_ap" {
   role             = aws_iam_role.lambda_iam.arn
   handler          = "index.handler"
   runtime          = "nodejs16.x"
-  timeout          = "7"
-  memory_size      = "1024"
+  timeout          = var.timeout
+  memory_size      = var.memory_size
   filename         = "./function/${var.environment}/bundle.zip"
   source_code_hash = filebase64sha256("./function/${var.environment}/bundle.zip")
   environment {
