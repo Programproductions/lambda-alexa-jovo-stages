@@ -5,7 +5,7 @@
 #####################################################
 # Creating Lambda resource
 resource "aws_lambda_function" "alexa_business_logic" {
-  function_name    = "alexa-${var.function_name}-business-logic-${var.environment}"
+  function_name    = "alexa-${var.function_name}-business-logic-${var.environment}-us"
   role             = aws_iam_role.lambda_iam.arn
   handler          = "index.handler"
   runtime          = "nodejs16.x"
@@ -29,13 +29,13 @@ resource "aws_lambda_function" "alexa_business_logic" {
 
 # Create the Log Group
 resource "aws_cloudwatch_log_group" "alexa_business_logic" {
-  name              = "/aws/lambda/${var.function_name}-${var.environment}"
+  name              = "/aws/lambda/${var.function_name}-${var.environment}-us"
   retention_in_days = 14
 }
 
 # create the Alexa trigger on the main function
 resource "aws_lambda_permission" "alexa_trigger" {
-  statement_id       = "AllowExecutionFromAlexa"
+  # statement_id       = "AllowExecutionFromAlexa"
   action             = "lambda:InvokeFunction"
   function_name      = aws_lambda_function.alexa_business_logic.function_name
   principal          = "alexa-appkit.amazon.com"
@@ -66,7 +66,7 @@ resource "aws_lambda_permission" "alexa_alias" {
 #####################################################
 resource "aws_lambda_function" "alexa_business_logic_uk" {
   provider         = aws.uk_provider
-  function_name    = "alexa-${var.function_name}-business-logic-${var.environment}"
+  function_name    = "alexa-${var.function_name}-business-logic-${var.environment}-uk"
   role             = aws_iam_role.lambda_iam.arn
   handler          = "index.handler"
   runtime          = "nodejs16.x"
@@ -82,22 +82,22 @@ resource "aws_lambda_function" "alexa_business_logic_uk" {
   }
   depends_on = [
     aws_iam_role_policy_attachment.lambda_logs,
-    aws_cloudwatch_log_group.alexa_business_logic,
+    aws_cloudwatch_log_group.alexa_business_logic_uk,
   ]
 
 }
 
 resource "aws_cloudwatch_log_group" "alexa_business_logic_uk" {
   provider          = aws.uk_provider
-  name              = "/aws/lambda/${var.function_name}-${var.environment}"
+  name              = "/aws/lambda/${var.function_name}-${var.environment}-eu"
   retention_in_days = 14
 }
 
 resource "aws_lambda_permission" "alexa_trigger_uk" {
-  provider           = aws.uk_provider
-  statement_id       = "AllowExecutionFromAlexa"
+  provider = aws.uk_provider
+  # statement_id       = "AllowExecutionFromAlexa"
   action             = "lambda:InvokeFunction"
-  function_name      = aws_lambda_function.alexa_business_logic.function_name
+  function_name      = aws_lambda_function.alexa_business_logic_uk.function_name
   principal          = "alexa-appkit.amazon.com"
   event_source_token = var.alexa_skill_id
 
@@ -112,8 +112,8 @@ resource "aws_lambda_alias" "alexa_uk" {
 }
 
 resource "aws_lambda_permission" "alexa_alias_uk" {
-  provider           = aws.uk_provider
-  statement_id       = "AllowAliasExecutionFromAlexa"
+  provider = aws.uk_provider
+  #statement_id       = "AllowAliasExecutionFromAlexa"
   action             = "lambda:InvokeFunction"
   function_name      = aws_lambda_alias.alexa_uk.arn
   principal          = "alexa-appkit.amazon.com"
@@ -126,7 +126,7 @@ resource "aws_lambda_permission" "alexa_alias_uk" {
 #####################################################
 resource "aws_lambda_function" "alexa_business_logic_ap" {
   provider         = aws.ap_provider
-  function_name    = "alexa-${var.function_name}-business-logic-${var.environment}"
+  function_name    = "alexa-${var.function_name}-business-logic-${var.environment}-ap"
   role             = aws_iam_role.lambda_iam.arn
   handler          = "index.handler"
   runtime          = "nodejs16.x"
@@ -142,14 +142,14 @@ resource "aws_lambda_function" "alexa_business_logic_ap" {
   }
   depends_on = [
     aws_iam_role_policy_attachment.lambda_logs,
-    aws_cloudwatch_log_group.alexa_business_logic,
+    aws_cloudwatch_log_group.alexa_business_logic_ap,
   ]
 
 }
 
 resource "aws_cloudwatch_log_group" "alexa_business_logic_ap" {
   provider          = aws.ap_provider
-  name              = "/aws/lambda/${var.function_name}-${var.environment}"
+  name              = "/aws/lambda/${var.function_name}-${var.environment}-ap"
   retention_in_days = 14
 }
 
@@ -157,7 +157,7 @@ resource "aws_lambda_permission" "alexa_trigger_ap" {
   provider           = aws.ap_provider
   statement_id       = "AllowExecutionFromAlexa"
   action             = "lambda:InvokeFunction"
-  function_name      = aws_lambda_function.alexa_business_logic.function_name
+  function_name      = aws_lambda_function.alexa_business_logic_ap.function_name
   principal          = "alexa-appkit.amazon.com"
   event_source_token = var.alexa_skill_id
 
@@ -172,8 +172,8 @@ resource "aws_lambda_alias" "alexa_ap" {
 }
 
 resource "aws_lambda_permission" "alexa_alias_ap" {
-  provider           = aws.ap_provider
-  statement_id       = "AllowAliasExecutionFromAlexa"
+  provider = aws.ap_provider
+  # statement_id       = "AllowAliasExecutionFromAlexa"
   action             = "lambda:InvokeFunction"
   function_name      = aws_lambda_alias.alexa_ap.arn
   principal          = "alexa-appkit.amazon.com"
