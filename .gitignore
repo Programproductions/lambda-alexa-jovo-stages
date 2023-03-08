@@ -10,6 +10,7 @@
 **/.terraform/*
 *.tfstate/*
 *.terraform.lock.hcl
+terraform.tfstate.d/
 plan.out
 # .tfstate files
 *.tfstate
